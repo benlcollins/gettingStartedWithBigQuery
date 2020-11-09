@@ -40,6 +40,24 @@ FROM
   `start-bigquery-294922.start_bigquery.brooklyn_bridge_pedestrians`
 WHERE
   weather_summary = 'snow' OR weather_summary = 'sleet';
+
+-- ORDER BY to sort rows
+SELECT
+  *
+FROM
+  `start-bigquery-294922.start_bigquery.brooklyn_bridge_pedestrians`
+ORDER BY
+  temperature ASC;
+
+-- WHERE clause to filter out nulls and ORDER BY to sort
+SELECT
+  *
+FROM
+  `start-bigquery-294922.start_bigquery.brooklyn_bridge_pedestrians`
+WHERE
+  temperature IS NOT NULL
+ORDER BY
+  temperature ASC;
   
 -- group by dates
 SELECT
