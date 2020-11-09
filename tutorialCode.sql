@@ -27,10 +27,19 @@ LIMIT
   10;
   
 -- math operations
+-- calculates total number of pedestrian crossings in dataset
 SELECT
   SUM(Pedestrians) AS total_pedestrians
 FROM
   `start-bigquery-294922.start_bigquery.brooklyn_bridge_pedestrians`;
+
+  -- WHERE clause to filter rows
+SELECT
+  *
+FROM
+  `start-bigquery-294922.start_bigquery.brooklyn_bridge_pedestrians`
+WHERE
+  weather_summary = 'snow' OR weather_summary = 'sleet';
   
 -- group by dates
 SELECT
@@ -65,11 +74,12 @@ WITH pedestrian_table AS (
     bb_date < '2017-11-01'
 )
 SELECT 
-  pedestrian_table.*,
+  pedestrian_table.bb_date,
+  pedestrian_table.bb_pedestrians,
   bike_table.Brooklyn_Bridge AS bb_bikes
 FROM
   pedestrian_table
 JOIN 
   `start-bigquery-294922.start_bigquery.nyc_bridges_bikes` AS bike_table
 ON 
-  pedestrian_table.bb_date = bike_table.Date;
+  pedestrian_table.bb_date = bike_table.Date; 
